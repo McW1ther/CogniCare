@@ -1,105 +1,158 @@
-# CogniCare
+<div align="center">
 
-A digital emotional wellbeing and self-reflection space, built for students and young
-adults dealing with academic pressure, loneliness, stress, and everyday mental fatigue.
+# 🧠 CogniCare
 
-> Understanding how you feel is the first step toward understanding yourself.
+### A quiet digital space for emotional check-ins, journaling, and self-reflection
 
-CogniCare is not a diagnostic tool and makes no medical claims. It's a quiet place to
-check in with yourself, write freely, and be met with something steadying — whatever
-you're feeling, including the difficult feelings that most "wellness" apps rush past.
+*Understanding how you feel is the first step toward understanding yourself.*
 
-## Running it
+![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20Auth-3FCF8E?logo=supabase&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-animations-EF0055?logo=framer&logoColor=white)
+![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)
+![Status](https://img.shields.io/badge/status-personal%20project-8A8577)
 
-```bash
-npm install
-npm run dev       # starts the dev server (Vite prints the local URL)
-npm run build     # type-checks and builds a production bundle to dist/
-npm run preview   # serves the production build locally
-```
+</div>
 
-You'll need a Supabase project — copy `.env.example` to `.env.local` and fill in your
-project's URL and publishable key (Settings → API in the Supabase dashboard), then apply
-the schema described in [Backend](#backend) below.
+---
 
-## What's in it
+## 🚀 Overview
 
-- **Accounts** — email + password, required to use the app (this is a personal journal,
-  not a demo). Your name, theme preference, check-ins, diary, and saved quotes all live
-  on your account, not just one browser.
-- **Emotional check-in** — 20 emotions (not just "good/bad"), each with its own colour
-  pair, icon, plain-language description, an acknowledgment that doesn't try to fix or
-  dismiss the feeling, a small grounding suggestion, and a tailored journal prompt. The
-  current emotion travels with you everywhere via a quick-switch pill in the nav.
-- **Diary** — a private, distraction-free writing space. Entries autosave and can be
-  tagged with an emotion. An archive view splits entries into **Positive / Mixed /
-  Negative**, with a quiet, dismissible content-warning pause before the Negative tab
-  rather than a jump-scare popup.
-- **Quotes** — ~100 hand-written supportive lines, five per emotion, matched to how that
-  specific feeling tends to need to be met rather than generic positivity. Save the ones
-  worth keeping; a new one rotates in daily.
-- **Dashboard** — a personal landing space: a greeting, your current emotional state, a
-  quote for it, recent diary entries, a quiet 7-day pattern strip, and (only if it's
-  actually warranted) a gentle, dismissible pointer toward Support.
-- **Insights** — a non-clinical look back at your check-in history: a two-week pattern
-  grid, which feelings show up most, and a plain timeline. Framed around noticing, not
-  diagnosing.
-- **Support** — crisis resources (988, Crisis Text Line, an international directory),
-  reachable with or without signing in, in the app's own supportive voice.
-- **Profile** — change your name, email, password, and pick from a small set of curated
-  icon-badge avatars.
+Most "wellness" apps rush straight to positivity — a quote, a breathing GIF, "just smile."
+CogniCare doesn't. It's built for students and young adults dealing with academic
+pressure, loneliness, stress, and everyday mental fatigue, on the idea that **difficult
+feelings deserve to be acknowledged, not managed away.**
 
-## Design approach
+It isn't a diagnostic tool and makes no medical claims — just a private, judgment-free
+place to notice how you feel, write about it, and be met with something steadying.
 
-The interface deliberately avoids two common traps: looking like a generic SaaS
-dashboard, and turning into an overwhelming wall of mood colour. The base UI stays a
-quiet "paper and ink" surface (warm paper / soft ink, a fine grain texture, Fraunces for
-emotional moments, Manrope for structure); the *currently selected emotion* shows up as
-a soft accent — an atmospheric glow behind hero content, a coloured icon badge, a thin
-border — built at runtime from each emotion's primary + calming colour pair via CSS
-`color-mix`. Colour and motion are concentrated in a few deliberate places (the check-in
-grid, quote cards, the week strip) rather than spread across every hover state. Full
-dark mode is supported and swaps the same token system rather than being bolted on.
+---
 
-## Backend
+## ✨ Features
 
-Supabase (Postgres + Auth), with four tables — `profiles`, `check_ins`,
-`journal_entries`, `saved_quotes` — each owned by `user_id` and locked down with row
-level security, plus a trigger that creates a `profiles` row automatically on sign-up.
-The emotion and quote catalogues stay as static app code (`src/data/`), never database
-rows, since nothing ever needs to query "which emotions exist."
+- 🎭 **20-emotion check-in** — not just "good/bad." Each emotion carries its own colour
+  pair, an acknowledgment that doesn't try to fix or dismiss the feeling, a small
+  grounding suggestion, and a tailored journal prompt.
+- 🔐 **Real accounts** — email + password via Supabase Auth. Your check-ins, diary, and
+  preferences live on your account, not just one browser.
+- 📓 **Private diary** — autosaving, emotion-tagged entries, archived into
+  **Positive / Mixed / Negative** — with a quiet, dismissible content-warning pause
+  before Negative rather than a jump-scare popup.
+- 💬 **~100 hand-written supportive quotes** — five per emotion, matched to how that
+  specific feeling actually needs to be met, not generic positivity. Save the ones worth
+  keeping.
+- 🏠 **A real dashboard** — greeting, current emotional state, today's quote, recent
+  entries, a 7-day pattern strip, and (only if genuinely warranted) a gentle nudge
+  toward Support.
+- 📊 **Insights, not analytics** — a two-week pattern grid and a plain timeline, framed
+  around noticing, never diagnosing.
+- 🆘 **Crisis resources** — reachable with or without signing in, in the app's own
+  supportive voice, never clinical.
+- 🎨 **A profile that's actually yours** — name, email, password, and a pick from ten
+  curated icon-badge avatars.
 
-## Tech stack
+---
 
-- **React 19 + TypeScript + Vite**
-- **Supabase** (`@supabase/supabase-js`) for auth + data, with RLS as the actual access
-  control — the client does optimistic local updates against a Zustand store, then
-  persists to Postgres.
-- **Tailwind CSS v4** (CSS-first `@theme`/`@utility` config) for the design token system.
-- **Zustand** — one store for session/profile (`useAuthStore`), one for content
-  (`useStore`, check-ins/diary/saved quotes).
-- **React Router v7** for the app shell, auth flow, and onboarding.
-- **Framer Motion** for the deliberate motion moments (the check-in grid's stagger, the
-  check-in confirmation reveal, quote crossfades, route transitions) — nothing scattered.
-- **lucide-react** for iconography.
+## 🎨 Design Philosophy
 
-## Project layout
+CogniCare deliberately avoids two traps: looking like a generic SaaS dashboard, and
+turning into an overwhelming wall of mood colour.
+
+The base UI stays a quiet **paper-and-ink** surface — warm paper, soft ink, a fine grain
+texture, Fraunces serif for emotional moments, Manrope sans for structure. The
+*currently selected emotion* only ever shows up as a soft accent — an atmospheric glow,
+a coloured icon badge, a thin border — built at runtime from each emotion's colour pair
+via CSS `color-mix()`. Colour and motion are concentrated in a few deliberate places
+(the check-in grid, quote cards, the week strip) instead of spread across every hover
+state. Full dark mode swaps the same token system rather than being bolted on.
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend**
+- React 19 + TypeScript + Vite
+- Tailwind CSS v4 (CSS-first `@theme` / `@utility` design tokens)
+- Zustand — `useAuthStore` (session/profile) + `useStore` (check-ins/diary/quotes)
+- React Router v7
+- Framer Motion — a handful of deliberate motion moments, nothing scattered
+- lucide-react
+
+**Backend**
+- Supabase — Postgres + Auth, with **Row Level Security as the actual access control**
+- Optimistic client-side updates, persisted to Postgres in the background
+
+**Deployment**
+- Vercel, auto-deploying from `main` on every push
+
+---
+
+## 🗄️ Backend
+
+Four tables — `profiles`, `check_ins`, `journal_entries`, `saved_quotes` — each owned by
+`user_id` and locked down with RLS, plus a trigger that creates a `profiles` row
+automatically on sign-up. The emotion, quote, and avatar catalogues stay as static app
+code (`src/data/`), never database rows — nothing ever needs to query "which emotions
+exist."
+
+---
+
+## 📂 Project Structure
 
 ```
 src/
-  data/         emotion catalogue, quote bank, avatar catalogue (the editorial content)
-  store/        useAuthStore (session/profile) + useStore (check-ins/diary/quotes)
-  lib/          date/streak/pattern helpers + the Supabase client
-  components/   ui/ (primitives), layout/ (shell, nav), checkin/, quotes/, diary/, auth/
-  pages/        one file per route, including pages/auth/
+├── data/         emotion catalogue, quote bank, avatar catalogue — the editorial content
+├── store/        useAuthStore (session/profile) + useStore (check-ins/diary/quotes)
+├── lib/          date/streak/pattern helpers + the Supabase client
+├── components/
+│   ├── ui/       Button, Panel, Modal, EmotionIcon, AvatarBadge…
+│   ├── layout/   app shell, sidebar, nav
+│   ├── checkin/  the emotion grid + quick-switcher
+│   ├── diary/    the difficult-tab content-warning gate
+│   └── auth/     shared auth-page shell
+└── pages/        one file per route, including pages/auth/
 ```
 
-## Extending it
+---
 
-- New emotions/quotes: edit `src/data/emotions.ts` / `src/data/quotes.ts` — everything
-  else (check-in grid, theming, insights, the diary archive's valence split) reads from
-  those two files.
-- New avatar options: edit `src/data/avatars.ts`.
-- Database changes: apply a migration in Supabase, then update the row↔type mappers in
-  `src/store/useAuthStore.ts` / `src/store/useStore.ts` — those are the only places that
-  touch the database directly.
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/McW1ther/cognicare.git
+cd cognicare
+npm install
+```
+
+Create a Supabase project, then copy the env template and fill in your project's URL +
+publishable key (Settings → API in the Supabase dashboard):
+
+```bash
+cp .env.example .env.local
+```
+
+```bash
+npm run dev       # start the dev server
+npm run build     # type-check + production build
+npm run preview   # serve the production build locally
+```
+
+---
+
+## 🔮 Roadmap
+
+- [ ] Dynamic-import code-splitting (bundle's grown past 500 KB with Supabase JS in it)
+- [ ] A real account-settings page for data export / deletion (currently a support-email
+      line on `/support`)
+- [ ] Optional region-aware crisis resources on the Support page
+
+---
+
+## 💡 Vision
+
+CogniCare exists on one idea: **you don't have to feel better before you're allowed to
+feel understood.** No streaks to protect, no score to keep — checking in honestly, even
+once, is enough.
+
