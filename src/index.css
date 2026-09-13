@@ -121,8 +121,9 @@ body {
    one confident mark rather than a sentence. */
 @utility logotype {
   font-family: var(--font-display);
-  font-variation-settings: "opsz" 144, "SOFT" 20;
-  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 15, "wght" 700;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
 }
 
 /* The brand orb — a soft accent-coloured ring around the breathing

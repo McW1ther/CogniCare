@@ -121,8 +121,8 @@ src/
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/McW1ther/cognicare.git
-cd cognicare
+git clone https://github.com/McW1ther/Orbis.git
+cd Orbis
 npm install
 ```
 

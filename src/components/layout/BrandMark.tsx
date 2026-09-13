@@ -31,16 +31,17 @@ function DiaryMark({ size }: { size: number }) {
 /** The Orbis wordmark — used in the sidebar, mobile top bar, and the
  * auth pages. One shared component so the treatment (and any future
  * tuning of it) stays identical everywhere it appears. Deliberately
- * unlike any other text in the app: italic Fraunces (nothing else is
- * italic) at a bold display optical size, coloured as a gradient of
- * the current emotion's own two colours instead of plain ink. */
+ * unlike any other text in the app: bold, upper-case Fraunces at a
+ * display optical size (nothing else in the app is bold serif or
+ * upper-case), coloured as a gradient of the current emotion's own
+ * two colours instead of plain ink. */
 export function BrandMark({ size = "md" }: { size?: keyof typeof SIZES }) {
   const { text, icon } = SIZES[size];
   return (
     <span className="inline-flex items-center gap-2.5">
       <DiaryMark size={icon} />
       <span
-        className={`logotype italic ${text}`}
+        className={`logotype ${text}`}
         style={{
           backgroundImage: "linear-gradient(120deg, var(--accent), var(--accent-soft))",
           WebkitBackgroundClip: "text",
