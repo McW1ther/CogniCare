@@ -60,8 +60,8 @@ export default function Insights() {
               return (
                 <div
                   key={date}
-                  className="aspect-square rounded-lg border border-mist"
-                  style={{ background: e ? e.primaryColor : "var(--color-paper-2)" }}
+                  className="aspect-square rounded-lg border border-hairline"
+                  style={{ background: e ? e.primaryColor : "rgba(34,38,29,0.05)" }}
                   title={`${formatDay(date)}${e ? ` · ${e.label}` : ""}`}
                 />
               );
@@ -97,25 +97,27 @@ export default function Insights() {
 
       <div className="mt-8">
         <h2 className="text-[15px] font-medium text-ink">Check-in history</h2>
-        <ul className="mt-3 divide-y divide-mist border-y border-mist">
-          {checkIns.slice(0, visible).map((c) => {
-            const e = getEmotion(c.emotionId)!;
-            return (
-              <li key={c.id} className="flex items-center gap-4 py-3.5">
-                <div className="w-20 shrink-0 text-xs text-ink-faint">{formatDay(c.timestamp)}</div>
-                <div className="w-16 shrink-0 text-xs text-ink-faint">{formatTime(c.timestamp)}</div>
-                <div className="flex items-center gap-2 text-sm text-ink">
-                  <e.icon size={14} style={{ color: e.primaryColor }} />
-                  {e.label}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <Panel className="mt-3 px-4 py-1">
+          <ul className="divide-y divide-hairline">
+            {checkIns.slice(0, visible).map((c) => {
+              const e = getEmotion(c.emotionId)!;
+              return (
+                <li key={c.id} className="flex items-center gap-4 py-3.5">
+                  <div className="w-20 shrink-0 text-xs text-ink-faint">{formatDay(c.timestamp)}</div>
+                  <div className="w-16 shrink-0 text-xs text-ink-faint">{formatTime(c.timestamp)}</div>
+                  <div className="flex items-center gap-2 text-sm text-ink">
+                    <e.icon size={14} style={{ color: e.primaryColor }} />
+                    {e.label}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </Panel>
         {visible < checkIns.length && (
           <button
             onClick={() => setVisible((v) => v + PAGE)}
-            className="mt-4 text-sm text-ink-soft underline decoration-mist-strong underline-offset-4 hover:text-ink"
+            className="mt-4 text-sm text-ink-soft underline decoration-hairline underline-offset-4 hover:text-ink"
           >
             Show more
           </button>

@@ -8,7 +8,9 @@ export function Panel({
 }: HTMLAttributes<HTMLDivElement> & { children: ReactNode; glow?: boolean }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-[var(--radius-panel)] border border-mist bg-paper-2/60 ${glow ? "accent-glow" : "panel-shadow"} ${className}`}
+      className={`relative overflow-hidden rounded-[var(--radius-panel)] ${
+        glow ? "glass-hero accent-glow" : "glass panel-shadow"
+      } ${className}`}
       {...rest}
     >
       {children}

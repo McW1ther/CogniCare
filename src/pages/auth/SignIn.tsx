@@ -72,7 +72,7 @@ export default function SignIn() {
 
         <p className="mt-6 text-center text-sm text-ink-soft">
           New here?{" "}
-          <Link to="/sign-up" className="text-ink underline decoration-mist-strong underline-offset-4">
+          <Link to="/sign-up" className="text-ink underline decoration-hairline underline-offset-4">
             Create a space
           </Link>
         </p>

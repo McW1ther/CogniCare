@@ -43,7 +43,7 @@ export default function Quotes() {
         Chosen for how you're feeling, not generic advice. Save the ones worth keeping.
       </p>
 
-      <div className="mt-7 flex gap-1 rounded-full border border-mist p-1 w-fit">
+      <div className="mt-7 flex gap-1 rounded-full border border-hairline p-1 w-fit">
         <TabButton active={tab === "browse"} onClick={() => setTab("browse")}>
           Browse by feeling
         </TabButton>
@@ -68,7 +68,7 @@ export default function Quotes() {
                   onClick={() => selectEmotion(e.id)}
                   data-selected={active || undefined}
                   style={{ ["--emo-color" as string]: e.primaryColor }}
-                  className="emo-pill flex items-center gap-1.5 rounded-full border border-mist bg-paper px-3.5 py-1.5 text-sm text-ink"
+                  className="emo-pill flex items-center gap-1.5 rounded-full border border-hairline bg-paper px-3.5 py-1.5 text-sm text-ink"
                 >
                   <Icon size={13} style={{ color: e.primaryColor }} />
                   {e.label}

@@ -2,7 +2,6 @@ import { NavLink, Link } from "react-router-dom";
 import { LifeBuoy, LogOut } from "lucide-react";
 import { NAV_ITEMS } from "./navConfig";
 import { EmotionPill } from "./EmotionPill";
-import { ThemeToggle } from "./ThemeToggle";
 import { AvatarBadge } from "../ui/AvatarBadge";
 import { useAuthStore } from "../../store/useAuthStore";
 
@@ -12,7 +11,7 @@ export function Sidebar() {
   const signOut = useAuthStore((s) => s.signOut);
 
   return (
-    <aside className="hidden w-64 shrink-0 flex-col border-r border-mist px-5 py-6 md:flex">
+    <aside className="sticky top-4 hidden h-[calc(100vh-2rem)] w-64 shrink-0 flex-col rounded-[var(--radius-panel)] glass panel-shadow px-5 py-6 md:ml-4 md:flex">
       <div className="flex items-center gap-2 px-2">
         <span className="brand-dot h-2.5 w-2.5 rounded-full accent-dot" />
         <span className="font-display text-lg text-ink">CogniCare</span>
@@ -20,7 +19,7 @@ export function Sidebar() {
 
       <Link
         to="/profile"
-        className="mt-4 flex items-center gap-2.5 rounded-full px-2 py-1.5 hover:bg-paper-2"
+        className="mt-4 flex items-center gap-2.5 rounded-full px-2 py-1.5 hover:bg-white/50"
       >
         <AvatarBadge avatarId={avatarId} size="sm" />
         <span className="truncate text-sm text-ink-soft">{name ? `Hi, ${name}` : "Your profile"}</span>
@@ -44,7 +43,7 @@ export function Sidebar() {
                   className="flex h-8 w-8 items-center justify-center rounded-full"
                   style={
                     isActive
-                      ? { background: "color-mix(in srgb, var(--accent) 16%, var(--color-paper))" }
+                      ? { background: "color-mix(in srgb, var(--accent) 22%, white)" }
                       : undefined
                   }
                 >
@@ -61,12 +60,8 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="mt-6 space-y-3 border-t border-mist pt-5">
+      <div className="mt-6 space-y-3 border-t border-white/60 pt-5">
         <EmotionPill full />
-        <div className="flex items-center justify-between px-1">
-          <span className="text-xs text-ink-faint">Appearance</span>
-          <ThemeToggle />
-        </div>
         <div className="flex items-center justify-between px-1 pt-1 text-sm">
           <Link
             to="/support"

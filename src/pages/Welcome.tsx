@@ -23,9 +23,9 @@ export default function Welcome() {
   const name = profile?.displayName?.trim();
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-paper px-5 py-10">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-10">
       <div className="aurora" />
-      <div className="relative z-10 w-full max-w-xl">
+      <div className="relative z-10 w-full max-w-xl rounded-[var(--radius-panel)] glass panel-shadow p-7 sm:p-9">
         <FormStep>
           <p className="text-sm text-ink-faint">CogniCare</p>
           <h1 className="mt-3 font-display text-4xl leading-[1.05] text-ink text-balance sm:text-5xl">
@@ -41,7 +41,7 @@ export default function Welcome() {
           <button
             type="button"
             onClick={() => finish()}
-            className="mt-6 text-sm text-ink-faint underline decoration-mist-strong underline-offset-4 hover:text-ink-soft"
+            className="mt-6 text-sm text-ink-faint underline decoration-hairline underline-offset-4 hover:text-ink-soft"
           >
             I'd rather not say right now
           </button>

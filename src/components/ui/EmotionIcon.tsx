@@ -33,11 +33,13 @@ export function EmotionIcon({
         width: box,
         height: box,
         background: emotion
-          ? `color-mix(in srgb, ${emotion.primaryColor} 22%, var(--color-paper))`
-          : "var(--color-paper-2)",
+          ? `color-mix(in srgb, ${emotion.primaryColor} 24%, rgba(255,255,255,0.65))`
+          : "rgba(255,255,255,0.5)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
         boxShadow: emotion
-          ? `inset 0 0 0 1px color-mix(in srgb, ${emotion.primaryColor} 40%, transparent)`
-          : "inset 0 0 0 1px var(--color-mist)",
+          ? `inset 0 0 0 1px color-mix(in srgb, ${emotion.primaryColor} 45%, white)`
+          : "inset 0 0 0 1px rgba(255,255,255,0.7)",
       }}
     >
       {Icon && (

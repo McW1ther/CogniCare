@@ -53,27 +53,27 @@ export default function Dashboard() {
 
   return (
     <PageContainer wide>
-      <section className="relative overflow-hidden rounded-[var(--radius-panel)] border border-mist panel-shadow px-6 py-9 sm:px-9 sm:py-12">
+      <section className="relative overflow-hidden rounded-[var(--radius-panel)] glass-hero accent-glow px-6 py-9 sm:px-9 sm:py-12">
         <div className="aurora" />
         <div className="relative z-10">
-          <p className="text-sm text-ink-faint">
+          <p className="text-sm text-white/70">
             {greeting}
             {name ? `, ${name}` : ""}
           </p>
-          <h1 className="mt-2 font-display text-4xl leading-[1.05] text-balance text-ink sm:text-5xl">
+          <h1 className="mt-2 font-display text-4xl leading-[1.05] text-balance text-white sm:text-5xl">
             {emotion ? emotion.description : "How are you feeling right now?"}
           </h1>
 
           {emotion ? (
             <div className="mt-6 max-w-lg">
-              <div className="flex items-center gap-2.5 text-sm text-ink-soft">
+              <div className="flex items-center gap-2.5 text-sm text-white/80">
                 <EmotionIcon emotion={emotion} size="sm" />
                 <span>
-                  Feeling <strong className="font-medium text-ink">{emotion.label}</strong>
+                  Feeling <strong className="font-medium text-white">{emotion.label}</strong>
                   {currentCheckIn ? ` since ${formatDay(currentCheckIn.timestamp).toLowerCase()}` : ""}
                 </span>
               </div>
-              <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{emotion.support}</p>
+              <p className="mt-3 text-[15px] leading-relaxed text-white/80">{emotion.support}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <Button
                   variant="primary"
@@ -92,7 +92,7 @@ export default function Dashboard() {
             </div>
           ) : (
             <div className="relative z-10 mt-6 max-w-xl">
-              <p className="text-[15px] text-ink-soft">
+              <p className="text-[15px] text-white/80">
                 Take a moment to notice what's actually going on for you. Pick whatever fits —
                 there's no wrong answer.
               </p>
@@ -107,7 +107,7 @@ export default function Dashboard() {
       {!checkedInToday && emotion && (
         <p className="mt-4 text-sm text-ink-faint">
           You haven't checked in today yet —{" "}
-          <Link to="/check-in" className="text-ink-soft underline decoration-mist-strong underline-offset-4 hover:text-ink">
+          <Link to="/check-in" className="text-ink-soft underline decoration-hairline underline-offset-4 hover:text-ink">
             see how you're feeling now
           </Link>
           .
@@ -115,9 +115,9 @@ export default function Dashboard() {
       )}
 
       {quote && emotion && (
-        <Panel className="mt-8 p-6 sm:p-8">
-          <p className="mb-4 text-sm text-ink-faint">Today's quote, for feeling {emotion.label.toLowerCase()}</p>
-          <QuoteCard quote={quote} large onShuffle={reshuffle} />
+        <Panel className="mt-8 p-6 sm:p-8" glow>
+          <p className="mb-4 text-sm text-white/70">Today's quote, for feeling {emotion.label.toLowerCase()}</p>
+          <QuoteCard quote={quote} large dark onShuffle={reshuffle} />
         </Panel>
       )}
 
@@ -143,27 +143,29 @@ export default function Dashboard() {
               </Link>
             </Panel>
           ) : (
-            <ul className="mt-3 divide-y divide-mist border-y border-mist">
-              {recentEntries.map((entry) => {
-                const entryEmotion = getEmotion(entry.emotionId);
-                return (
-                  <li key={entry.id}>
-                    <Link
-                      to={`/diary/${entry.id}`}
-                      className="flex items-center gap-4 py-4 hover:bg-paper-2/60"
-                    >
-                      <div className="w-16 shrink-0 text-xs text-ink-faint">{formatDay(entry.createdAt)}</div>
-                      <EmotionDot emotion={entryEmotion} />
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-[15px] text-ink">
-                          {entry.title || entry.body.slice(0, 60) || "Untitled entry"}
-                        </p>
-                      </div>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+            <Panel className="mt-3 px-2 py-1">
+              <ul className="divide-y divide-hairline">
+                {recentEntries.map((entry) => {
+                  const entryEmotion = getEmotion(entry.emotionId);
+                  return (
+                    <li key={entry.id}>
+                      <Link
+                        to={`/diary/${entry.id}`}
+                        className="flex items-center gap-4 rounded-[calc(var(--radius-panel)-14px)] px-3 py-4 hover:bg-white/50"
+                      >
+                        <div className="w-16 shrink-0 text-xs text-ink-faint">{formatDay(entry.createdAt)}</div>
+                        <EmotionDot emotion={entryEmotion} />
+                        <div className="min-w-0 flex-1">
+                          <p className="truncate text-[15px] text-ink">
+                            {entry.title || entry.body.slice(0, 60) || "Untitled entry"}
+                          </p>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Panel>
           )}
         </div>
 
@@ -196,7 +198,7 @@ export default function Dashboard() {
                               background: `radial-gradient(circle at 35% 30%, color-mix(in srgb, ${e.primaryColor} 70%, white 30%), ${e.primaryColor})`,
                               boxShadow: `0 4px 12px -2px color-mix(in srgb, ${e.primaryColor} 55%, transparent)`,
                             }
-                          : { background: "var(--color-paper)", boxShadow: "inset 0 0 0 1px var(--color-mist)" }
+                          : { background: "rgba(34,38,29,0.06)", boxShadow: "inset 0 0 0 1px rgba(34,38,29,0.15)" }
                       }
                       title={e ? e.label : "No check-in"}
                     />
@@ -230,7 +232,7 @@ export default function Dashboard() {
               </p>
               <Link
                 to="/support"
-                className="mt-3 inline-flex items-center gap-1.5 text-sm text-ink underline decoration-mist-strong underline-offset-4 hover:text-ink-soft"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm text-ink underline decoration-hairline underline-offset-4 hover:text-ink-soft"
               >
                 <LifeBuoy size={14} />
                 See support options

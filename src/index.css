@@ -4,27 +4,41 @@
 @import "@fontsource-variable/manrope";
 
 /* ---------------------------------------------------------------- *
- * CogniCare design tokens
- * A paper-and-light palette: the page itself stays quiet (paper /
- * ink / mist) while the currently selected emotion only ever shows
- * up as a soft accent — a glow, a dot, a thin border — never as a
- * full-bleed colour wash. --accent / --accent-soft are written onto
- * <html> at runtime by ThemeProvider from the emotion catalog.
+ * CogniCare design tokens — "glass" system
+ *
+ * A single fixed atmospheric backdrop (a CSS-built sky-to-meadow
+ * gradient, not a photo) sits behind the whole app. Content floats
+ * on top of it as frosted glass: translucent white surfaces with
+ * backdrop-blur. Two glass registers are used throughout:
+ *   - default (light glass, dark ink text) for anything text-dense —
+ *     lists, forms, the diary, settings;
+ *   - "hero" (dark glass, white text — see Panel's `glow` prop) for
+ *     the handful of quote/mood moments, matching the reference.
+ * --accent / --accent-soft are still written onto <html> at runtime
+ * by ThemeProvider from the emotion catalogue, and still show up as
+ * small coloured moments (icon badges, selection glows) — that part
+ * of the concept didn't change, only the base surface did. Only one
+ * visual mode exists for now; dark mode is removed but the plumbing
+ * (Profile.themeMode) is left in place in case it comes back later.
  * ---------------------------------------------------------------- */
 @theme {
   --font-display: "Fraunces Variable", "Iowan Old Style", serif;
   --font-sans: "Manrope Variable", "Manrope", system-ui, sans-serif;
 
-  --color-paper: #f5f2eb;
-  --color-paper-2: #efe9dd;
-  --color-ink: #221f1a;
-  --color-ink-soft: #5c584d;
-  --color-ink-faint: #8a8577;
-  --color-mist: #e2dbcb;
-  --color-mist-strong: #d3c9b3;
-  --color-moss: #63735f;
-  --color-moss-deep: #4b5a48;
-  --color-clay: #bf7f4f;
+  --color-paper: #ffffff;
+  --color-paper-2: #ffffff;
+  --color-ink: #22261d;
+  --color-ink-soft: #4b5240;
+  --color-ink-faint: #767c68;
+  --color-mist: rgba(255, 255, 255, 0.55);
+  --color-mist-strong: rgba(255, 255, 255, 0.8);
+  /* A dark, low-opacity hairline — for borders/dividers that sit on
+     white or near-white surfaces (inputs, pills, list rows), where
+     --color-mist's translucent-white would be invisible. */
+  --color-hairline: rgba(34, 38, 29, 0.12);
+  --color-moss: #5c7a4a;
+  --color-moss-deep: #435c34;
+  --color-clay: #c98a52;
 
   --shadow-glow: 0 30px 70px -30px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
 }
@@ -33,24 +47,9 @@
   color-scheme: light;
   --accent: var(--color-moss);
   --accent-soft: var(--color-clay);
-  --radius-panel: 22px;
-  --radius-field: 14px;
-  --shadow-panel: 0 1px 2px rgba(40, 32, 20, 0.05), 0 20px 40px -24px rgba(40, 32, 20, 0.22);
-}
-
-html.dark {
-  color-scheme: dark;
-  --color-paper: #1b1a16;
-  --color-paper-2: #232019;
-  --color-ink: #ece7da;
-  --color-ink-soft: #b5ae9c;
-  --color-ink-faint: #837c6b;
-  --color-mist: #35311f;
-  --color-mist-strong: #423c26;
-  --color-moss: #93a48c;
-  --color-moss-deep: #b7c6ae;
-  --color-clay: #e3a274;
-  --shadow-panel: 0 1px 0 rgba(255, 246, 228, 0.04), 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+  --radius-panel: 28px;
+  --radius-field: 16px;
+  --shadow-panel: 0 1px 1px rgba(30, 40, 15, 0.06), 0 24px 48px -26px rgba(20, 35, 10, 0.35);
 }
 
 * {
@@ -62,13 +61,37 @@ html {
   scrollbar-color: var(--color-mist-strong) transparent;
 }
 
+/* The atmospheric backdrop: fixed behind everything, never scrolls.
+   A soft sun-glow radial over a sky → pale meadow → deep-green
+   vertical gradient, evoking the same golden-hour-field mood as the
+   reference without reproducing anyone's actual photograph. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(1100px 700px at 20% -8%, rgba(255, 248, 222, 0.9), transparent 62%),
+    linear-gradient(180deg, #b9d5e5 0%, #d9e8ce 38%, #aec583 66%, #79984f 100%);
+}
+
+/* A soft white scrim over the backdrop so ink text stays legible
+   everywhere, not just inside glass cards — the backdrop still reads
+   through as a muted, pastel atmosphere. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.6);
+}
+
 body {
-  background-color: var(--color-paper);
-  /* A fine paper grain, built in CSS from an SVG turbulence filter —
-     no image request, and it's what actually separates "warm paper"
-     from "flat off-white div". Blended in gently so it reads as
-     texture, not noise. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  background: transparent;
+  /* A fine grain over the backdrop — no image request, just an SVG
+     turbulence filter — the texture that keeps the atmosphere from
+     reading as a flat gradient. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
   background-blend-mode: soft-light;
   background-repeat: repeat;
   color: var(--color-ink);
@@ -93,6 +116,25 @@ body {
   font-variation-settings: "opsz" 30, "SOFT" 40;
 }
 
+/* Light glass — the default surface for text-dense content: lists,
+   forms, settings. Translucent white + blur over the backdrop, dark
+   ink text stays on top. */
+@utility glass {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+/* Dark glass — the "hero" register for quote/mood moments (Panel's
+   `glow` prop). White text, an emotion-tinted tint, more blur. */
+@utility glass-hero {
+  background: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
 /* A soft field of light behind hero content — built from the current
    emotion's two colours. Deliberately more present than a hint: this
    is the one place colour is allowed to feel atmospheric rather than
@@ -105,9 +147,9 @@ body {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(620px 380px at 10% 15%, color-mix(in srgb, var(--accent) 40%, transparent), transparent 70%),
-    radial-gradient(520px 360px at 82% 5%, color-mix(in srgb, var(--accent-soft) 34%, transparent), transparent 72%),
-    radial-gradient(700px 420px at 45% 45%, color-mix(in srgb, var(--accent) 12%, color-mix(in srgb, var(--accent-soft) 12%, transparent)), transparent 75%);
+    radial-gradient(620px 380px at 10% 15%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 70%),
+    radial-gradient(520px 360px at 82% 5%, color-mix(in srgb, var(--accent-soft) 48%, transparent), transparent 72%),
+    radial-gradient(700px 420px at 45% 45%, color-mix(in srgb, var(--accent) 18%, color-mix(in srgb, var(--accent-soft) 18%, transparent)), transparent 75%);
   filter: blur(26px);
   animation: drift 12s ease-in-out infinite;
 }
@@ -125,16 +167,16 @@ body {
 }
 
 @utility accent-wash {
-  background: color-mix(in srgb, var(--accent) 10%, var(--color-paper));
+  background: color-mix(in srgb, var(--accent) 14%, white);
 }
 
 @utility accent-glow {
   box-shadow: 0 24px 60px -28px color-mix(in srgb, var(--accent) 65%, transparent);
 }
 
-/* The default elevation for a raised surface — warm-toned, soft, and
-   present enough that panels read as lifted paper rather than a flat
-   outlined box. */
+/* The default elevation for a raised surface — soft, green-tinted to
+   match the new backdrop, present enough that panels read as lifted
+   glass rather than a flat outlined box. */
 @utility panel-shadow {
   box-shadow: var(--shadow-panel);
 }
@@ -161,12 +203,12 @@ body {
 }
 .emo-pill:hover,
 .emo-pill:focus-visible {
-  background: color-mix(in srgb, var(--emo-color) 14%, var(--color-paper));
-  border-color: color-mix(in srgb, var(--emo-color) 50%, var(--color-mist));
+  background: color-mix(in srgb, var(--emo-color) 20%, white);
+  border-color: color-mix(in srgb, var(--emo-color) 55%, var(--color-mist));
 }
 .emo-pill[data-selected="true"] {
-  background: color-mix(in srgb, var(--emo-color) 18%, var(--color-paper));
-  border-color: color-mix(in srgb, var(--emo-color) 60%, var(--color-mist));
+  background: color-mix(in srgb, var(--emo-color) 26%, white);
+  border-color: color-mix(in srgb, var(--emo-color) 65%, var(--color-mist));
   box-shadow: 0 10px 24px -16px color-mix(in srgb, var(--emo-color) 70%, transparent);
 }
 

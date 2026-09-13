@@ -121,7 +121,7 @@ export default function SignUp() {
 
         <p className="mt-6 text-center text-sm text-ink-soft">
           Already have a space?{" "}
-          <Link to="/sign-in" className="text-ink underline decoration-mist-strong underline-offset-4">
+          <Link to="/sign-in" className="text-ink underline decoration-hairline underline-offset-4">
             Sign in
           </Link>
         </p>

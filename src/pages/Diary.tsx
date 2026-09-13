@@ -73,7 +73,7 @@ export default function Diary() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search your entries"
-              className="w-full rounded-full border border-mist bg-paper py-2.5 pl-9 pr-4 text-sm text-ink outline-none focus:accent-ring"
+              className="w-full rounded-full border border-hairline bg-paper py-2.5 pl-9 pr-4 text-sm text-ink outline-none focus:accent-ring"
             />
           </div>
         </>
@@ -108,51 +108,53 @@ export default function Diary() {
           {query ? `No entries match “${query}”.` : "Nothing tagged this way yet."}
         </p>
       ) : (
-        <ul className="mt-6 divide-y divide-mist border-y border-mist">
-          {filtered.map((entry) => {
-            const emotion = getEmotion(entry.emotionId);
-            const confirming = confirmId === entry.id;
-            return (
-              <li key={entry.id} className="group flex items-center gap-4 py-4">
-                <Link to={`/diary/${entry.id}`} className="flex min-w-0 flex-1 items-center gap-4">
-                  <div className="w-20 shrink-0 text-xs text-ink-faint">{formatDay(entry.createdAt)}</div>
-                  <EmotionDot emotion={emotion} />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-[15px] text-ink">{entry.title || "Untitled entry"}</p>
-                    <p className="truncate text-sm text-ink-faint">{entry.body.slice(0, 90)}</p>
-                  </div>
-                </Link>
-                {confirming ? (
-                  <div className="flex shrink-0 items-center gap-2">
+        <Panel className="mt-6 px-2 py-1">
+          <ul className="divide-y divide-hairline">
+            {filtered.map((entry) => {
+              const emotion = getEmotion(entry.emotionId);
+              const confirming = confirmId === entry.id;
+              return (
+                <li key={entry.id} className="group flex items-center gap-4 rounded-[calc(var(--radius-panel)-14px)] px-3 py-4">
+                  <Link to={`/diary/${entry.id}`} className="flex min-w-0 flex-1 items-center gap-4">
+                    <div className="w-20 shrink-0 text-xs text-ink-faint">{formatDay(entry.createdAt)}</div>
+                    <EmotionDot emotion={emotion} />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-[15px] text-ink">{entry.title || "Untitled entry"}</p>
+                      <p className="truncate text-sm text-ink-faint">{entry.body.slice(0, 90)}</p>
+                    </div>
+                  </Link>
+                  {confirming ? (
+                    <div className="flex shrink-0 items-center gap-2">
+                      <button
+                        onClick={() => setConfirmId(null)}
+                        className="text-sm text-ink-faint hover:text-ink-soft"
+                      >
+                        Keep
+                      </button>
+                      <button
+                        onClick={() => {
+                          deleteEntry(entry.id);
+                          setConfirmId(null);
+                        }}
+                        className="rounded-full bg-ink px-3 py-1.5 text-sm text-paper"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ) : (
                     <button
-                      onClick={() => setConfirmId(null)}
-                      className="text-sm text-ink-faint hover:text-ink-soft"
+                      onClick={() => setConfirmId(entry.id)}
+                      aria-label="Delete entry"
+                      className="shrink-0 rounded-full p-2 text-ink-faint opacity-0 hover:bg-white/60 hover:text-ink group-hover:opacity-100 focus-visible:opacity-100"
                     >
-                      Keep
+                      <Trash2 size={16} />
                     </button>
-                    <button
-                      onClick={() => {
-                        deleteEntry(entry.id);
-                        setConfirmId(null);
-                      }}
-                      className="rounded-full bg-ink px-3 py-1.5 text-sm text-paper"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => setConfirmId(entry.id)}
-                    aria-label="Delete entry"
-                    className="shrink-0 rounded-full p-2 text-ink-faint opacity-0 hover:bg-paper-2 hover:text-ink group-hover:opacity-100 focus-visible:opacity-100"
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </Panel>
       )}
     </PageContainer>
   );

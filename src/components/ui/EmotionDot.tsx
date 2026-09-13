@@ -19,7 +19,8 @@ export function EmotionDot({
       style={{
         width: px,
         height: px,
-        background: emotion?.primaryColor ?? "var(--color-mist-strong)",
+        background: emotion?.primaryColor ?? "rgba(34,38,29,0.25)",
+        boxShadow: "0 0 0 2px rgba(255,255,255,0.8)",
       }}
     />
   );

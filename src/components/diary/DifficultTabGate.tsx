@@ -32,7 +32,7 @@ export function DifficultTabGate({
           type="checkbox"
           checked={dontAsk}
           onChange={(e) => setDontAsk(e.target.checked)}
-          className="h-4 w-4 rounded border-mist accent-[var(--accent)]"
+          className="h-4 w-4 rounded border-hairline accent-[var(--accent)]"
         />
         Don't show this again
       </label>

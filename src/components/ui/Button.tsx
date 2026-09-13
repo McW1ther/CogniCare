@@ -26,9 +26,9 @@ export function Button({ variant = "secondary", size = "md", icon, className = "
 
   const variantClass: Record<Variant, string> = {
     primary: "text-paper",
-    secondary: "border accent-border text-ink hover:accent-wash",
-    ghost: "text-ink-soft hover:text-ink hover:bg-[var(--color-paper-2)]",
-    danger: "border border-mist-strong text-ink-soft hover:text-ink hover:border-clay/60",
+    secondary: "glass text-ink hover:accent-wash",
+    ghost: "text-ink-soft hover:text-ink hover:bg-white/50",
+    danger: "glass text-ink-soft hover:text-ink hover:border-clay/50",
   };
 
   const variantStyle =

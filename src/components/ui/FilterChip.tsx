@@ -14,7 +14,7 @@ export function FilterChip({
       type="button"
       onClick={onClick}
       className={`rounded-full px-3.5 py-1.5 text-sm transition-colors ${
-        active ? "bg-ink text-paper" : "text-ink-soft hover:bg-paper-2"
+        active ? "bg-ink text-paper" : "glass text-ink-soft hover:text-ink"
       }`}
     >
       {children}

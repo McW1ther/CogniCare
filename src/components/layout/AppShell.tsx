@@ -8,11 +8,11 @@ export function AppShell() {
   const location = useLocation();
 
   return (
-    <div className="flex min-h-screen bg-paper text-ink">
+    <div className="flex min-h-screen text-ink">
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <TopBar />
-        <main className="flex-1 pb-24 md:pb-0">
+        <main className="flex-1 pb-28 md:pb-0">
           {/* One quiet, consistent transition across every route swap —
               not a per-section reveal, just enough to keep page changes
               from feeling like a hard cut. */}

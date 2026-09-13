@@ -68,7 +68,7 @@ export default function ForgotPassword() {
         )}
 
         <p className="mt-6 text-center text-sm text-ink-soft">
-          <Link to="/sign-in" className="text-ink underline decoration-mist-strong underline-offset-4">
+          <Link to="/sign-in" className="text-ink underline decoration-hairline underline-offset-4">
             Back to sign in
           </Link>
         </p>

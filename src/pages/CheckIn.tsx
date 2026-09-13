@@ -56,10 +56,10 @@ export default function CheckIn() {
                 >
                   <EmotionIcon emotion={picked} size="md" />
                 </motion.div>
-                <h2 className="font-display text-2xl text-ink">Feeling {picked.label.toLowerCase()}</h2>
+                <h2 className="font-display text-2xl text-white">Feeling {picked.label.toLowerCase()}</h2>
               </div>
-              <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{picked.support}</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink-faint">
+              <p className="mt-3 text-[15px] leading-relaxed text-white/80">{picked.support}</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/65">
                 Something small: {picked.suggestion}
               </p>
 
@@ -78,7 +78,7 @@ export default function CheckIn() {
                 >
                   See a quote for this
                 </Button>
-                <Button variant="ghost" icon={<ArrowRight size={16} />} onClick={() => navigate("/")}>
+                <Button variant="secondary" icon={<ArrowRight size={16} />} onClick={() => navigate("/")}>
                   Continue to your space
                 </Button>
               </div>

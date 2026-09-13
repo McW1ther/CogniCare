@@ -29,7 +29,7 @@ export function AvatarBadge({
       style={{
         width: box,
         height: box,
-        background: avatar ? avatar.color : "var(--color-mist-strong)",
+        background: avatar ? avatar.color : "#8a8f7c",
       }}
     >
       <Icon size={icon} strokeWidth={1.75} color="var(--color-paper)" />

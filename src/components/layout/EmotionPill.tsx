@@ -21,7 +21,7 @@ export function EmotionPill({ full = false }: { full?: boolean }) {
         {Icon ? (
           <Icon size={15} strokeWidth={1.75} style={{ color: emotion?.primaryColor }} />
         ) : (
-          <span className="h-2 w-2 rounded-full bg-mist-strong" />
+          <span className="h-2 w-2 rounded-full bg-ink/25" />
         )}
         <span className="truncate">
           {emotion ? emotion.label : "How are you feeling?"}

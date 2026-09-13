@@ -74,7 +74,7 @@ export function EmotionGrid({
                     onClick={() => onSelect(emotion)}
                     data-selected={selected || undefined}
                     style={{ ["--emo-color" as string]: emotion.primaryColor }}
-                    className="emo-pill flex items-center gap-2 rounded-full border border-mist bg-paper py-1.5 pl-1.5 pr-4 text-sm text-ink"
+                    className="emo-pill flex items-center gap-2 rounded-full border border-hairline bg-paper py-1.5 pl-1.5 pr-4 text-sm text-ink"
                     aria-pressed={selected}
                   >
                     <EmotionIcon emotion={emotion} size="sm" />

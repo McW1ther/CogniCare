@@ -8,16 +8,16 @@ import { motion } from "framer-motion";
  * of the app rather than a bolted-on form. */
 export function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-paper px-5 py-10">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-10">
       <div className="aurora" />
       <div className="relative z-10 w-full max-w-md">
-        <div className="mb-8 flex items-center justify-center gap-2">
+        <div className="mb-6 flex items-center justify-center gap-2">
           <span className="brand-dot h-2.5 w-2.5 rounded-full accent-dot" />
           <span className="font-display text-lg text-ink">CogniCare</span>
         </div>
-        {children}
-        <p className="mt-8 text-center text-xs text-ink-faint">
-          <Link to="/support" className="underline decoration-mist-strong underline-offset-4 hover:text-ink-soft">
+        <div className="rounded-[var(--radius-panel)] glass panel-shadow p-7 sm:p-8">{children}</div>
+        <p className="mt-6 text-center text-xs text-ink-faint">
+          <Link to="/support" className="underline decoration-hairline underline-offset-4 hover:text-ink-soft">
             Need to talk to someone right now?
           </Link>
         </p>
@@ -39,7 +39,7 @@ export function FormStep({ children }: { children: ReactNode }) {
 }
 
 export const fieldClass =
-  "w-full rounded-[var(--radius-field)] border border-mist bg-paper px-4 py-3 text-[15px] text-ink outline-none accent-border focus:accent-ring";
+  "w-full rounded-[var(--radius-field)] border border-hairline bg-paper px-4 py-3 text-[15px] text-ink outline-none accent-border focus:accent-ring";
 
 export function FieldLabel({ children }: { children: ReactNode }) {
   return <label className="mb-1.5 block text-sm text-ink-soft">{children}</label>;

@@ -27,7 +27,7 @@ export function EmotionSwitcher({ open, onClose }: { open: boolean; onClose: () 
           onClose();
           navigate("/check-in");
         }}
-        className="mt-6 text-sm text-ink-soft underline decoration-mist-strong underline-offset-4 hover:text-ink"
+        className="mt-6 text-sm text-ink-soft underline decoration-hairline underline-offset-4 hover:text-ink"
       >
         Open the full check-in instead
       </button>

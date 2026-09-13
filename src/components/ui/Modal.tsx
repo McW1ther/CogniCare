@@ -44,7 +44,7 @@ export function Modal({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 w-full max-w-lg rounded-[var(--radius-panel)] border border-mist bg-paper p-6 panel-shadow sm:p-7"
+            className="relative z-10 w-full max-w-lg rounded-[var(--radius-panel)] border border-white/70 bg-white/85 p-6 backdrop-blur-2xl panel-shadow sm:p-7"
           >
             <div className="mb-5 flex items-center justify-between">
               <h2 className="font-display text-xl text-ink">{title}</h2>

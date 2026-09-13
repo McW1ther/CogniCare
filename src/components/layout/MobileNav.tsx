@@ -3,22 +3,31 @@ import { NAV_ITEMS } from "./navConfig";
 
 export function MobileNav() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-mist bg-paper/95 backdrop-blur md:hidden">
-      <div className="flex items-stretch justify-between px-2 pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed inset-x-3 bottom-3 z-40 rounded-full glass panel-shadow md:hidden">
+      <div className="flex items-stretch justify-between px-2 py-1">
         {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (
           <NavLink
             key={to}
             to={to}
             end={end}
-            className="flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] text-ink-soft"
+            className="flex flex-1 flex-col items-center gap-1 py-2 text-[11px] text-ink-soft"
           >
             {({ isActive }) => (
               <>
-                <Icon
-                  size={19}
-                  strokeWidth={1.75}
-                  style={isActive ? { color: "var(--accent)" } : undefined}
-                />
+                <span
+                  className="flex h-8 w-8 items-center justify-center rounded-full"
+                  style={
+                    isActive
+                      ? { background: "color-mix(in srgb, var(--accent) 22%, white)" }
+                      : undefined
+                  }
+                >
+                  <Icon
+                    size={18}
+                    strokeWidth={1.75}
+                    style={isActive ? { color: "var(--accent)" } : undefined}
+                  />
+                </span>
                 <span style={isActive ? { color: "var(--color-ink)" } : undefined}>{label}</span>
               </>
             )}

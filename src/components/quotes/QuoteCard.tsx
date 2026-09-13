@@ -6,15 +6,23 @@ import type { Quote } from "../../types";
 export function QuoteCard({
   quote,
   large = false,
+  dark = false,
   onShuffle,
 }: {
   quote: Quote;
   large?: boolean;
+  /** True when the card sits on a dark "hero" glass panel (Panel's
+   * `glow` prop) — flips the text/icon colours to their light-on-dark
+   * equivalents instead of ink-on-glass. */
+  dark?: boolean;
   onShuffle?: () => void;
 }) {
   const saved = useStore((s) => s.savedQuoteIds.includes(quote.id));
   const toggleSaveQuote = useStore((s) => s.toggleSaveQuote);
   const reduceMotion = useReducedMotion();
+
+  const textClass = dark ? "text-white" : "text-ink";
+  const iconClass = dark ? "text-white/75 hover:bg-white/15 hover:text-white" : "text-ink-soft hover:bg-paper-2 hover:text-ink";
 
   return (
     <div className={large ? "" : "flex items-start justify-between gap-4"}>
@@ -26,11 +34,11 @@ export function QuoteCard({
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className={
+            className={`${
               large
-                ? "font-display text-balance text-4xl leading-[1.25] text-ink sm:text-5xl"
-                : "font-display text-balance text-xl leading-snug text-ink"
-            }
+                ? "font-display text-balance text-4xl leading-[1.25] sm:text-5xl"
+                : "font-display text-balance text-xl leading-snug"
+            } ${textClass}`}
           >
             “{quote.text}”
           </motion.p>
@@ -45,9 +53,13 @@ export function QuoteCard({
           onClick={() => toggleSaveQuote(quote.id)}
           aria-pressed={saved}
           aria-label={saved ? "Remove from saved quotes" : "Save this quote"}
-          className="flex h-9 w-9 items-center justify-center rounded-full text-ink-soft hover:bg-paper-2 hover:text-ink"
+          className={`flex h-9 w-9 items-center justify-center rounded-full ${iconClass}`}
         >
-          <Heart size={17} fill={saved ? "var(--accent)" : "none"} color={saved ? "var(--accent)" : "currentColor"} />
+          <Heart
+            size={17}
+            fill={saved ? "var(--accent)" : "none"}
+            color={saved ? "var(--accent)" : "currentColor"}
+          />
         </motion.button>
         {onShuffle && (
           <motion.button
@@ -56,7 +68,7 @@ export function QuoteCard({
             type="button"
             onClick={onShuffle}
             aria-label="Show another quote"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-ink-soft hover:bg-paper-2 hover:text-ink"
+            className={`flex h-9 w-9 items-center justify-center rounded-full ${iconClass}`}
           >
             <Shuffle size={16} />
           </motion.button>

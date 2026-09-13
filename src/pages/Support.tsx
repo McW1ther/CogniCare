@@ -9,7 +9,7 @@ import { Panel } from "../components/ui/Panel";
  * non-clinical voice, never diagnostic. */
 export default function Support() {
   return (
-    <div className="min-h-screen bg-paper px-5 py-10 sm:py-14">
+    <div className="min-h-screen px-5 py-10 sm:py-14">
       <div className="mx-auto w-full max-w-xl">
         <Link
           to="/"
@@ -69,7 +69,7 @@ export default function Support() {
                   href="https://findahelpline.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-ink underline decoration-mist-strong underline-offset-4 hover:text-ink-soft"
+                  className="text-ink underline decoration-hairline underline-offset-4 hover:text-ink-soft"
                 >
                   findahelpline.com
                 </a>{" "}
@@ -84,9 +84,9 @@ export default function Support() {
           not only in an emergency.
         </p>
 
-        <p className="mt-10 border-t border-mist pt-6 text-xs leading-relaxed text-ink-faint">
+        <p className="mt-10 border-t border-hairline pt-6 text-xs leading-relaxed text-ink-faint">
           Want your account and everything in it deleted? Email{" "}
-          <a href="mailto:privacy@cognicare.app" className="underline decoration-mist-strong underline-offset-4">
+          <a href="mailto:privacy@cognicare.app" className="underline decoration-hairline underline-offset-4">
             privacy@cognicare.app
           </a>{" "}
           and it'll be removed.

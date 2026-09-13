@@ -70,7 +70,7 @@ export default function DiaryEntry() {
     return (
       <PageContainer>
         <p className="text-[15px] text-ink-soft">This entry doesn't exist, or was deleted.</p>
-        <Link to="/diary" className="mt-4 inline-block text-sm text-ink-soft underline decoration-mist-strong underline-offset-4">
+        <Link to="/diary" className="mt-4 inline-block text-sm text-ink-soft underline decoration-hairline underline-offset-4">
           Back to diary
         </Link>
       </PageContainer>
@@ -127,7 +127,7 @@ export default function DiaryEntry() {
         <span aria-hidden>·</span>
         <span>{formatTime(createdAt)}</span>
         <span
-          className="emo-pill ml-1 flex items-center gap-1 rounded-full border border-mist pl-3 pr-1 py-1"
+          className="emo-pill ml-1 flex items-center gap-1 rounded-full border border-hairline pl-3 pr-1 py-1"
           style={emotion ? { ["--emo-color" as string]: emotion.primaryColor } : undefined}
         >
           <button
