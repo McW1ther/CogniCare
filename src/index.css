@@ -1,0 +1,209 @@
+@import "tailwindcss";
+@import "@fontsource-variable/fraunces/soft.css";
+@import "@fontsource-variable/fraunces/soft-italic.css";
+@import "@fontsource-variable/manrope";
+
+/* ---------------------------------------------------------------- *
+ * CogniCare design tokens
+ * A paper-and-light palette: the page itself stays quiet (paper /
+ * ink / mist) while the currently selected emotion only ever shows
+ * up as a soft accent — a glow, a dot, a thin border — never as a
+ * full-bleed colour wash. --accent / --accent-soft are written onto
+ * <html> at runtime by ThemeProvider from the emotion catalog.
+ * ---------------------------------------------------------------- */
+@theme {
+  --font-display: "Fraunces Variable", "Iowan Old Style", serif;
+  --font-sans: "Manrope Variable", "Manrope", system-ui, sans-serif;
+
+  --color-paper: #f5f2eb;
+  --color-paper-2: #efe9dd;
+  --color-ink: #221f1a;
+  --color-ink-soft: #5c584d;
+  --color-ink-faint: #8a8577;
+  --color-mist: #e2dbcb;
+  --color-mist-strong: #d3c9b3;
+  --color-moss: #63735f;
+  --color-moss-deep: #4b5a48;
+  --color-clay: #bf7f4f;
+
+  --shadow-glow: 0 30px 70px -30px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+}
+
+:root {
+  color-scheme: light;
+  --accent: var(--color-moss);
+  --accent-soft: var(--color-clay);
+  --radius-panel: 22px;
+  --radius-field: 14px;
+  --shadow-panel: 0 1px 2px rgba(40, 32, 20, 0.05), 0 20px 40px -24px rgba(40, 32, 20, 0.22);
+}
+
+html.dark {
+  color-scheme: dark;
+  --color-paper: #1b1a16;
+  --color-paper-2: #232019;
+  --color-ink: #ece7da;
+  --color-ink-soft: #b5ae9c;
+  --color-ink-faint: #837c6b;
+  --color-mist: #35311f;
+  --color-mist-strong: #423c26;
+  --color-moss: #93a48c;
+  --color-moss-deep: #b7c6ae;
+  --color-clay: #e3a274;
+  --shadow-panel: 0 1px 0 rgba(255, 246, 228, 0.04), 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  border-color: var(--color-mist);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-mist-strong) transparent;
+}
+
+body {
+  background-color: var(--color-paper);
+  /* A fine paper grain, built in CSS from an SVG turbulence filter —
+     no image request, and it's what actually separates "warm paper"
+     from "flat off-white div". Blended in gently so it reads as
+     texture, not noise. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  background-blend-mode: soft-light;
+  background-repeat: repeat;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 70%, var(--color-ink) 10%);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 30, "SOFT" 40;
+}
+
+/* A soft field of light behind hero content — built from the current
+   emotion's two colours. Deliberately more present than a hint: this
+   is the one place colour is allowed to feel atmospheric rather than
+   just decorative, like light through a coloured window rather than
+   a coat of paint. */
+@utility aurora {
+  position: absolute;
+  inset: -25% -15% auto -15%;
+  height: 480px;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(620px 380px at 10% 15%, color-mix(in srgb, var(--accent) 40%, transparent), transparent 70%),
+    radial-gradient(520px 360px at 82% 5%, color-mix(in srgb, var(--accent-soft) 34%, transparent), transparent 72%),
+    radial-gradient(700px 420px at 45% 45%, color-mix(in srgb, var(--accent) 12%, color-mix(in srgb, var(--accent-soft) 12%, transparent)), transparent 75%);
+  filter: blur(26px);
+  animation: drift 12s ease-in-out infinite;
+}
+
+@utility accent-dot {
+  background: var(--accent);
+}
+
+@utility accent-ring {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+@utility accent-border {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--color-mist));
+}
+
+@utility accent-wash {
+  background: color-mix(in srgb, var(--accent) 10%, var(--color-paper));
+}
+
+@utility accent-glow {
+  box-shadow: 0 24px 60px -28px color-mix(in srgb, var(--accent) 65%, transparent);
+}
+
+/* The default elevation for a raised surface — warm-toned, soft, and
+   present enough that panels read as lifted paper rather than a flat
+   outlined box. */
+@utility panel-shadow {
+  box-shadow: var(--shadow-panel);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* A slow, gentle pulse on the brand mark — a quiet nod to the
+   breathing exercises the app itself suggests. Respects
+   prefers-reduced-motion via the global override below. */
+@utility brand-dot {
+  animation: breathe 4.5s ease-in-out infinite;
+}
+
+/* Per-emotion pill button (check-in grid + quick switcher). Each
+   button carries its own colour via an inline --emo-color custom
+   property, so hover/selected states stay tied to that emotion even
+   though the global --accent belongs to whatever is currently
+   selected. */
+.emo-pill {
+  --emo-color: var(--color-mist-strong);
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.emo-pill:hover,
+.emo-pill:focus-visible {
+  background: color-mix(in srgb, var(--emo-color) 14%, var(--color-paper));
+  border-color: color-mix(in srgb, var(--emo-color) 50%, var(--color-mist));
+}
+.emo-pill[data-selected="true"] {
+  background: color-mix(in srgb, var(--emo-color) 18%, var(--color-paper));
+  border-color: color-mix(in srgb, var(--emo-color) 60%, var(--color-mist));
+  box-shadow: 0 10px 24px -16px color-mix(in srgb, var(--emo-color) 70%, transparent);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate3d(4%, 5%, 0) scale(1.1) rotate(2.5deg);
+  }
+  66% {
+    transform: translate3d(-3%, 2%, 0) scale(1.05) rotate(-2deg);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
