@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 CogniCare
+# 🧠 Orbis
 
 ### A quiet digital space for emotional check-ins, journaling, and self-reflection
 
@@ -22,7 +22,7 @@
 ## 🚀 Overview
 
 Most "wellness" apps rush straight to positivity — a quote, a breathing GIF, "just smile."
-CogniCare doesn't. It's built for students and young adults dealing with academic
+Orbis doesn't. It's built for students and young adults dealing with academic
 pressure, loneliness, stress, and everyday mental fatigue, on the idea that **difficult
 feelings deserve to be acknowledged, not managed away.**
 
@@ -58,7 +58,7 @@ place to notice how you feel, write about it, and be met with something steadyin
 
 ## 🎨 Design Philosophy
 
-CogniCare deliberately avoids two traps: looking like a generic SaaS dashboard, and
+Orbis deliberately avoids two traps: looking like a generic SaaS dashboard, and
 turning into an overwhelming wall of mood colour.
 
 The base UI stays a quiet **paper-and-ink** surface — warm paper, soft ink, a fine grain
@@ -152,7 +152,7 @@ npm run preview   # serve the production build locally
 
 ## 💡 Vision
 
-CogniCare exists on one idea: **you don't have to feel better before you're allowed to
+Orbis exists on one idea: **you don't have to feel better before you're allowed to
 feel understood.** No streaks to protect, no score to keep — checking in honestly, even
 once, is enough.
 

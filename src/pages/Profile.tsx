@@ -74,7 +74,7 @@ function NameSection({ displayName, onSave }: { displayName: string; onSave: (na
       <h2 className="text-[15px] font-medium text-ink">Name</h2>
       <form className="mt-4 flex flex-wrap items-end gap-3" onSubmit={handleSubmit}>
         <div className="flex-1 min-w-[200px]">
-          <FieldLabel>What should CogniCare call you?</FieldLabel>
+          <FieldLabel>What should Orbis call you?</FieldLabel>
           <input
             value={name}
             onChange={(e) => {

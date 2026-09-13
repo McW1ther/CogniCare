@@ -2,6 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { LifeBuoy, LogOut } from "lucide-react";
 import { NAV_ITEMS } from "./navConfig";
 import { EmotionPill } from "./EmotionPill";
+import { BrandMark } from "./BrandMark";
 import { AvatarBadge } from "../ui/AvatarBadge";
 import { useAuthStore } from "../../store/useAuthStore";
 
@@ -12,9 +13,8 @@ export function Sidebar() {
 
   return (
     <aside className="sticky top-4 hidden h-[calc(100vh-2rem)] w-64 shrink-0 flex-col rounded-[var(--radius-panel)] glass panel-shadow px-5 py-6 md:ml-4 md:flex">
-      <div className="flex items-center gap-2 px-2">
-        <span className="brand-dot h-2.5 w-2.5 rounded-full accent-dot" />
-        <span className="font-display text-lg text-ink">CogniCare</span>
+      <div className="px-2">
+        <BrandMark size="md" />
       </div>
 
       <Link

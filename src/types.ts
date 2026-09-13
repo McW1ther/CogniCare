@@ -9,7 +9,7 @@ export interface Emotion {
   label: string;
   family: EmotionFamily;
   icon: LucideIcon;
-  /** Original CogniCare colour concept. */
+  /** Original Orbis colour concept. */
   primaryColor: string;
   calmingColor: string;
   /** A short, plain-language description shown on the check-in grid. */

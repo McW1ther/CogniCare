@@ -30,7 +30,7 @@ export default function CheckIn() {
       <p className="text-sm text-ink-faint">Emotional check-in</p>
       <h1 className="mt-2 font-display text-4xl leading-[1.05] text-ink">How are you feeling right now?</h1>
       <p className="mt-3 text-[15px] text-ink-soft">
-        Emotions aren't simply good or bad — CogniCare just wants to meet you where you actually
+        Emotions aren't simply good or bad — Orbis just wants to meet you where you actually
         are. Pick what fits, even if it's more than one thing at once.
       </p>
 

@@ -20,7 +20,7 @@ export interface AvatarOption {
 
 /** A small curated set of profile pictures — solid-colour icon
  * badges rather than uploaded photos, so there's no storage/upload
- * infrastructure needed and every option already fits CogniCare's
+ * infrastructure needed and every option already fits Orbis's
  * own visual language. */
 export const AVATAR_OPTIONS: AvatarOption[] = [
   { id: "sun", icon: Sun, color: "#D89A3E" },

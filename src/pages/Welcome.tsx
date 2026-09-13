@@ -27,12 +27,12 @@ export default function Welcome() {
       <div className="aurora" />
       <div className="relative z-10 w-full max-w-xl rounded-[var(--radius-panel)] glass panel-shadow p-7 sm:p-9">
         <FormStep>
-          <p className="text-sm text-ink-faint">CogniCare</p>
+          <p className="text-sm text-ink-faint">Orbis</p>
           <h1 className="mt-3 font-display text-4xl leading-[1.05] text-ink text-balance sm:text-5xl">
             {name ? `How are you feeling, ${name}?` : "How are you feeling right now?"}
           </h1>
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink-soft">
-            There's no wrong answer. This just helps CogniCare meet you where you are — you can
+            There's no wrong answer. This just helps Orbis meet you where you are — you can
             change it again any time.
           </p>
           <div className="mt-7">

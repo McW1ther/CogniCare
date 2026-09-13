@@ -4,7 +4,7 @@ import type { Quote } from "../types";
  * Supportive lines, grouped by the emotion they're written for. These
  * are deliberately not generic motivational quotes — each one is
  * written to fit how that specific feeling tends to need to be met
- * (see the CogniCare emotion catalogue for the reasoning per family).
+ * (see the Orbis emotion catalogue for the reasoning per family).
  */
 const RAW: Record<string, string[]> = {
   happy: [

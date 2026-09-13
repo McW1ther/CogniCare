@@ -23,9 +23,9 @@ import {
 import type { Emotion, Valence } from "../types";
 
 /**
- * The CogniCare emotion catalogue.
+ * The Orbis emotion catalogue.
  *
- * `primaryColor` / `calmingColor` are the original CogniCare colour
+ * `primaryColor` / `calmingColor` are the original Orbis colour
  * concept — primary is the colour of the feeling itself, calming is
  * the colour the interface leans toward to support it. Both are used
  * together (never as full-screen fills) to build the soft accent

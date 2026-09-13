@@ -16,7 +16,7 @@ export default function Support() {
           className="inline-flex items-center gap-1.5 text-sm text-ink-faint hover:text-ink-soft"
         >
           <ArrowLeft size={15} />
-          Back to CogniCare
+          Back to Orbis
         </Link>
 
         <p className="mt-6 text-sm text-ink-faint">Support</p>
@@ -24,7 +24,7 @@ export default function Support() {
           If things feel like too much right now
         </h1>
         <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
-          CogniCare is a space for reflection — it isn't professional care, and it isn't built to
+          Orbis is a space for reflection — it isn't professional care, and it isn't built to
           handle a crisis. If you're in immediate danger, please contact your local emergency
           services. Otherwise, the people below are trained for exactly this, any hour, for free.
         </p>

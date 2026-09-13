@@ -4,7 +4,7 @@
 @import "@fontsource-variable/manrope";
 
 /* ---------------------------------------------------------------- *
- * CogniCare design tokens — "glass" system
+ * Orbis design tokens — "glass" system
  *
  * A single fixed atmospheric backdrop (a CSS-built sky-to-meadow
  * gradient, not a photo) sits behind the whole app. Content floats
@@ -114,6 +114,22 @@ body {
 @utility font-display {
   font-family: var(--font-display);
   font-variation-settings: "opsz" 30, "SOFT" 40;
+}
+
+/* The wordmark, not a heading — pushed to Fraunces' display optical
+   size for real letterform contrast, tight tracking so it reads as
+   one confident mark rather than a sentence. */
+@utility logotype {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144, "SOFT" 20;
+  letter-spacing: -0.02em;
+}
+
+/* The brand orb — a soft accent-coloured ring around the breathing
+   dot, standing in for "Orbis" itself rather than just a bullet. */
+@utility brand-orb {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent),
+    0 0 16px -2px color-mix(in srgb, var(--accent) 55%, transparent);
 }
 
 /* Light glass — the default surface for text-dense content: lists,

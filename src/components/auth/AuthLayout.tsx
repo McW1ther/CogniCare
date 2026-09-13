@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { BrandMark } from "../layout/BrandMark";
 
 /** Shared shell for every auth-adjacent screen (sign up, sign in,
  * password reset, and the trimmed-down Welcome check-in) — the same
@@ -11,9 +12,8 @@ export function AuthLayout({ children }: { children: ReactNode }) {
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-10">
       <div className="aurora" />
       <div className="relative z-10 w-full max-w-md">
-        <div className="mb-6 flex items-center justify-center gap-2">
-          <span className="brand-dot h-2.5 w-2.5 rounded-full accent-dot" />
-          <span className="font-display text-lg text-ink">CogniCare</span>
+        <div className="mb-6 flex items-center justify-center">
+          <BrandMark size="lg" />
         </div>
         <div className="rounded-[var(--radius-panel)] glass panel-shadow p-7 sm:p-8">{children}</div>
         <p className="mt-6 text-center text-xs text-ink-faint">
