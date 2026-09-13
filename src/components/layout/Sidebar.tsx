@@ -3,10 +3,12 @@ import { LifeBuoy, LogOut } from "lucide-react";
 import { NAV_ITEMS } from "./navConfig";
 import { EmotionPill } from "./EmotionPill";
 import { ThemeToggle } from "./ThemeToggle";
+import { AvatarBadge } from "../ui/AvatarBadge";
 import { useAuthStore } from "../../store/useAuthStore";
 
 export function Sidebar() {
   const name = useAuthStore((s) => s.profile?.displayName);
+  const avatarId = useAuthStore((s) => s.profile?.avatarId);
   const signOut = useAuthStore((s) => s.signOut);
 
   return (
@@ -15,7 +17,14 @@ export function Sidebar() {
         <span className="brand-dot h-2.5 w-2.5 rounded-full accent-dot" />
         <span className="font-display text-lg text-ink">CogniCare</span>
       </div>
-      {name && <p className="mt-1 px-2 text-xs text-ink-faint">Hi, {name}</p>}
+
+      <Link
+        to="/profile"
+        className="mt-4 flex items-center gap-2.5 rounded-full px-2 py-1.5 hover:bg-paper-2"
+      >
+        <AvatarBadge avatarId={avatarId} size="sm" />
+        <span className="truncate text-sm text-ink-soft">{name ? `Hi, ${name}` : "Your profile"}</span>
+      </Link>
 
       <nav className="mt-8 flex flex-1 flex-col gap-1">
         {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (

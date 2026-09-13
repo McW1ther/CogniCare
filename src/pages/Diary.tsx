@@ -13,11 +13,10 @@ import { formatDay } from "../lib/date";
 import { Plus, Search, Trash2 } from "lucide-react";
 import type { Valence } from "../types";
 
-const TABS: { id: Valence | "all"; label: string }[] = [
-  { id: "all", label: "All entries" },
-  { id: "good", label: "Good" },
-  { id: "difficult", label: "Difficult" },
+const TABS: { id: Valence; label: string }[] = [
+  { id: "good", label: "Positive" },
   { id: "mixed", label: "Mixed" },
+  { id: "difficult", label: "Negative" },
 ];
 
 const SESSION_ACK_KEY = "cognicare-difficult-ack-session";
@@ -30,7 +29,7 @@ export default function Diary() {
 
   const [query, setQuery] = useState("");
   const [confirmId, setConfirmId] = useState<string | null>(null);
-  const [tab, setTab] = useState<Valence | "all">("all");
+  const [tab, setTab] = useState<Valence>("good");
   const [gateClearedThisSession, setGateClearedThisSession] = useState(
     () => sessionStorage.getItem(SESSION_ACK_KEY) === "1",
   );
@@ -39,8 +38,7 @@ export default function Diary() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    let list = entries;
-    if (tab !== "all") list = list.filter((e) => getValence(e.emotionId) === tab);
+    let list = entries.filter((e) => getValence(e.emotionId) === tab);
     if (q) list = list.filter((e) => e.title.toLowerCase().includes(q) || e.body.toLowerCase().includes(q));
     return list;
   }, [entries, query, tab]);
@@ -101,7 +99,7 @@ export default function Diary() {
               sessionStorage.setItem(SESSION_ACK_KEY, "1");
               setGateClearedThisSession(true);
             }}
-            onCancel={() => setTab("all")}
+            onCancel={() => setTab("good")}
             onDontAskAgain={() => updateProfile({ diaryDifficultAck: true })}
           />
         </div>

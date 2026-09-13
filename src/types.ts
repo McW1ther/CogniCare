@@ -57,6 +57,7 @@ export interface Profile {
   themeMode: ThemeMode;
   onboarded: boolean;
   diaryDifficultAck: boolean;
+  avatarId: string | null;
 }
 
 export type AuthStatus = "loading" | "signedOut" | "signedIn";

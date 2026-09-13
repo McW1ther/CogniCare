@@ -11,6 +11,7 @@ import Diary from "./pages/Diary";
 import DiaryEntry from "./pages/DiaryEntry";
 import Quotes from "./pages/Quotes";
 import Insights from "./pages/Insights";
+import Profile from "./pages/Profile";
 import Support from "./pages/Support";
 import SignUp from "./pages/auth/SignUp";
 import SignIn from "./pages/auth/SignIn";
@@ -116,6 +117,7 @@ export default function App() {
               <Route path="/diary/:id" element={<DiaryEntry />} />
               <Route path="/quotes" element={<Quotes />} />
               <Route path="/insights" element={<Insights />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

@@ -9,6 +9,7 @@ interface ProfileRow {
   theme_mode: ThemeMode;
   onboarded: boolean;
   diary_difficult_ack: boolean;
+  avatar_id: string | null;
 }
 
 function fromRow(row: ProfileRow): Profile {
@@ -18,6 +19,7 @@ function fromRow(row: ProfileRow): Profile {
     themeMode: row.theme_mode,
     onboarded: row.onboarded,
     diaryDifficultAck: row.diary_difficult_ack,
+    avatarId: row.avatar_id,
   };
 }
 
@@ -34,7 +36,10 @@ interface AuthState {
   signOut: () => Promise<void>;
   sendPasswordReset: (email: string) => Promise<void>;
   updatePassword: (newPassword: string) => Promise<void>;
-  updateProfile: (patch: Partial<Pick<Profile, "displayName" | "themeMode" | "onboarded" | "diaryDifficultAck">>) => Promise<void>;
+  updateEmail: (newEmail: string) => Promise<void>;
+  updateProfile: (
+    patch: Partial<Pick<Profile, "displayName" | "themeMode" | "onboarded" | "diaryDifficultAck" | "avatarId">>,
+  ) => Promise<void>;
 }
 
 let initialized = false;
@@ -125,6 +130,18 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     }
   },
 
+  updateEmail: async (newEmail) => {
+    set({ authError: null });
+    const { error } = await supabase.auth.updateUser({ email: newEmail });
+    if (error) {
+      set({ authError: error.message });
+      throw error;
+    }
+    // The address doesn't actually change until the confirmation
+    // link(s) are clicked — onAuthStateChange picks up the new email
+    // automatically once that happens, nothing to set here now.
+  },
+
   updateProfile: async (patch) => {
     const { userId, profile } = get();
     if (!userId || !profile) return;
@@ -136,6 +153,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     if (patch.themeMode !== undefined) row.theme_mode = patch.themeMode;
     if (patch.onboarded !== undefined) row.onboarded = patch.onboarded;
     if (patch.diaryDifficultAck !== undefined) row.diary_difficult_ack = patch.diaryDifficultAck;
+    if (patch.avatarId !== undefined) row.avatar_id = patch.avatarId;
 
     const { error } = await supabase.from("profiles").update(row).eq("id", userId);
     if (error) {
