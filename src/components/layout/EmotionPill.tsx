@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useCurrentCheckIn } from "../../store/selectors";
 import { getEmotion } from "../../data/emotions";
 import { EmotionSwitcher } from "../checkin/EmotionSwitcher";
+import { tourRef } from "../../store/useTourStore";
 
-export function EmotionPill({ full = false }: { full?: boolean }) {
+export function EmotionPill({ full = false, tourKey }: { full?: boolean; tourKey?: string }) {
   const [open, setOpen] = useState(false);
   const currentCheckIn = useCurrentCheckIn();
   const emotion = getEmotion(currentCheckIn?.emotionId);
@@ -12,6 +13,7 @@ export function EmotionPill({ full = false }: { full?: boolean }) {
   return (
     <>
       <button
+        ref={tourKey ? tourRef(tourKey) : undefined}
         type="button"
         onClick={() => setOpen(true)}
         className={`flex items-center gap-2 rounded-full border accent-border bg-paper py-2 text-sm text-ink transition-colors hover:accent-wash ${

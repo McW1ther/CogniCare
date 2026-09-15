@@ -58,6 +58,7 @@ export interface Profile {
   onboarded: boolean;
   diaryDifficultAck: boolean;
   avatarId: string | null;
+  hasSeenTour: boolean;
 }
 
 export type AuthStatus = "loading" | "signedOut" | "signedIn";

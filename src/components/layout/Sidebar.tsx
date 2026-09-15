@@ -5,6 +5,7 @@ import { EmotionPill } from "./EmotionPill";
 import { BrandMark } from "./BrandMark";
 import { AvatarBadge } from "../ui/AvatarBadge";
 import { useAuthStore } from "../../store/useAuthStore";
+import { tourRef } from "../../store/useTourStore";
 
 export function Sidebar() {
   const name = useAuthStore((s) => s.profile?.displayName);
@@ -18,6 +19,7 @@ export function Sidebar() {
       </div>
 
       <Link
+        ref={tourRef("profile-avatar")}
         to="/profile"
         className="mt-4 flex items-center gap-2.5 rounded-full px-2 py-1.5 hover:bg-white/50"
       >
@@ -26,9 +28,10 @@ export function Sidebar() {
       </Link>
 
       <nav className="mt-8 flex flex-1 flex-col gap-1">
-        {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (
+        {NAV_ITEMS.map(({ to, label, icon: Icon, end, tourKey }) => (
           <NavLink
             key={to}
+            ref={tourKey ? tourRef(tourKey) : undefined}
             to={to}
             end={end}
             className={({ isActive }) =>
@@ -61,9 +64,10 @@ export function Sidebar() {
       </nav>
 
       <div className="mt-6 space-y-3 border-t border-white/60 pt-5">
-        <EmotionPill full />
+        <EmotionPill full tourKey="emotion-pill" />
         <div className="flex items-center justify-between px-1 pt-1 text-sm">
           <Link
+            ref={tourRef("support-link")}
             to="/support"
             className="inline-flex items-center gap-1.5 text-ink-faint hover:text-ink-soft"
           >

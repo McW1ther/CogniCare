@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Compass } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
+import { useTourStore } from "../store/useTourStore";
 import { AVATAR_OPTIONS } from "../data/avatars";
 import { PageContainer } from "../components/layout/PageContainer";
 import { Panel } from "../components/ui/Panel";
@@ -53,6 +54,16 @@ export default function Profile() {
         <NameSection displayName={profile?.displayName ?? ""} onSave={(name) => updateProfile({ displayName: name })} />
         <EmailSection currentEmail={email} onSave={updateEmail} />
         <PasswordSection onSave={updatePassword} />
+
+        <Panel className="flex items-center justify-between gap-4 p-6">
+          <div>
+            <h2 className="text-[15px] font-medium text-ink">Quick tour</h2>
+            <p className="mt-1 text-sm text-ink-soft">A short walkthrough of what's where.</p>
+          </div>
+          <Button variant="secondary" size="sm" icon={<Compass size={15} />} onClick={() => useTourStore.getState().start()}>
+            Show me
+          </Button>
+        </Panel>
       </div>
     </PageContainer>
   );

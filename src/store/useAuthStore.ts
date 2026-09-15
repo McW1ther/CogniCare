@@ -10,6 +10,7 @@ interface ProfileRow {
   onboarded: boolean;
   diary_difficult_ack: boolean;
   avatar_id: string | null;
+  has_seen_tour: boolean;
 }
 
 function fromRow(row: ProfileRow): Profile {
@@ -20,6 +21,7 @@ function fromRow(row: ProfileRow): Profile {
     onboarded: row.onboarded,
     diaryDifficultAck: row.diary_difficult_ack,
     avatarId: row.avatar_id,
+    hasSeenTour: row.has_seen_tour,
   };
 }
 
@@ -38,7 +40,9 @@ interface AuthState {
   updatePassword: (newPassword: string) => Promise<void>;
   updateEmail: (newEmail: string) => Promise<void>;
   updateProfile: (
-    patch: Partial<Pick<Profile, "displayName" | "themeMode" | "onboarded" | "diaryDifficultAck" | "avatarId">>,
+    patch: Partial<
+      Pick<Profile, "displayName" | "themeMode" | "onboarded" | "diaryDifficultAck" | "avatarId" | "hasSeenTour">
+    >,
   ) => Promise<void>;
 }
 
@@ -154,6 +158,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     if (patch.onboarded !== undefined) row.onboarded = patch.onboarded;
     if (patch.diaryDifficultAck !== undefined) row.diary_difficult_ack = patch.diaryDifficultAck;
     if (patch.avatarId !== undefined) row.avatar_id = patch.avatarId;
+    if (patch.hasSeenTour !== undefined) row.has_seen_tour = patch.hasSeenTour;
 
     const { error } = await supabase.from("profiles").update(row).eq("id", userId);
     if (error) {

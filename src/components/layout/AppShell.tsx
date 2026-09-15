@@ -1,11 +1,27 @@
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sidebar } from "./Sidebar";
 import { MobileNav } from "./MobileNav";
 import { TopBar } from "./TopBar";
+import { TourOverlay } from "../tour/TourOverlay";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useTourStore } from "../../store/useTourStore";
 
 export function AppShell() {
   const location = useLocation();
+  const onboarded = useAuthStore((s) => s.profile?.onboarded);
+  const hasSeenTour = useAuthStore((s) => s.profile?.hasSeenTour);
+  const startTour = useTourStore((s) => s.start);
+
+  // Auto-start the tour exactly once for a brand-new account, right
+  // after they land here from onboarding. A short delay so the page
+  // settles first rather than popping up mid-transition.
+  useEffect(() => {
+    if (!onboarded || hasSeenTour) return;
+    const t = setTimeout(() => startTour(), 700);
+    return () => clearTimeout(t);
+  }, [onboarded, hasSeenTour, startTour]);
 
   return (
     <div className="flex min-h-screen text-ink">
@@ -27,6 +43,7 @@ export function AppShell() {
         </main>
         <MobileNav />
       </div>
+      <TourOverlay />
     </div>
   );
 }
